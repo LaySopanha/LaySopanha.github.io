@@ -330,7 +330,7 @@
       <div class="modal-content">
         <span class="close" onclick="closeModal(1)">&times;</span>
         <div class="video-wrapper">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/WISoPbQScS8" frameborder="0" allowfullscreen></iframe>
+          <iframe width="100%" height="100%" data-src="https://www.youtube.com/embed/WISoPbQScS8" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -339,7 +339,7 @@
       <div class="modal-content">
         <span class="close" onclick="closeModal(1)">&times;</span>
         <div class="video-wrapper">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/CEWR09nCKGs" frameborder="0" allowfullscreen></iframe>
+          <iframe width="100%" height="100%" data-src="https://www.youtube.com/embed/CEWR09nCKGs" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -348,7 +348,7 @@
       <div class="modal-content">
         <span class="close" onclick="closeModal(1)">&times;</span>
         <div class="video-wrapper">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/eTreYbNdCCM" frameborder="0" allowfullscreen></iframe>
+          <iframe width="100%" height="100%" data-src="https://www.youtube.com/embed/eTreYbNdCCM" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -396,35 +396,47 @@
   </body>
 
 
-<script>
-  // Function to open each modal based on project number
-  function openModal(modalNumber) {
-    document.getElementById(`videoModal${modalNumber}`).style.display = "block";
-  }
 
-  // Function to close each modal based on project number
-  function closeModal(modalNumber) {
-    document.getElementById(`videoModal${modalNumber}`).style.display = "none";
-  }
+  <script>
+    // Function to open each modal based on project number
+    function openModal(modalNumber) {
+      const modal = document.getElementById(`videoModal${modalNumber}`);
+      const iframe = modal.querySelector('iframe');
 
-  // Event listeners for each project's "Live Demo" button
-  document.getElementById('videoBtn1').onclick = function() {
-    openModal(1);
-  }
-  document.getElementById('videoBtn2').onclick = function() {
-    openModal(2);
-  }
-  document.getElementById('videoBtn3').onclick = function() {
-    openModal(3);
-  }
+      // Restore the original src to start the video
+      iframe.src = iframe.dataset.src;
+      modal.style.display = "block";
+    }
 
-  // Close modal if user clicks outside of it
-  window.onclick = function(event) {
-    for (let i = 1; i <= 3; i++) {
-      if (event.target == document.getElementById(`videoModal${i}`)) {
-        closeModal(i);
+    // Function to close each modal based on project number
+    function closeModal(modalNumber) {
+      const modal = document.getElementById(`videoModal${modalNumber}`);
+      const iframe = modal.querySelector('iframe');
+
+      // Set src to empty to stop the video
+      iframe.src = "";
+      modal.style.display = "none";
+    }
+
+    // Event listeners for each project's "Live Demo" button
+    document.getElementById('videoBtn1').onclick = function() {
+      openModal(1);
+    }
+    document.getElementById('videoBtn2').onclick = function() {
+      openModal(2);
+    }
+    document.getElementById('videoBtn3').onclick = function() {
+      openModal(3);
+    }
+
+    // Close modal if user clicks outside of it
+    window.onclick = function(event) {
+      for (let i = 1; i <= 3; i++) {
+        const modal = document.getElementById(`videoModal${i}`);
+        if (event.target == modal) {
+          closeModal(i);
+        }
       }
     }
-  }
-</script>
+  </script>
 </html>

@@ -154,14 +154,16 @@ section {
   display: flex;
 }
 
-/* PROFILE SECTION */
-
+/* PROFILE SECTION - General Styling for Large Screens */
 #profile {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5rem;
   height: 80vh;
+  flex-direction: row; /* Keep layout horizontal on larger screens */
+  text-align: left;
+  padding: 0 20px;
 }
 
 .section__pic-container {
@@ -180,12 +182,51 @@ section {
   width: 100%;
   object-fit: cover;
 }
+
 .section__pic-container2 {
   display: flex;
   height: 400px;
   width: 400px;
   margin: auto 0;
+}
 
+/* Responsive Adjustments for Medium Screens (Tablets and Small Laptops) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  #profile {
+    gap: 3rem;
+    height: auto; /* Adjust height to content */
+    padding: 20px;
+    flex-direction: row; /* Keep layout horizontal */
+  }
+
+  .section__pic-container, .section__pic-container2 {
+    width: 300px; /* Reduce size for medium screens */
+    height: 300px;
+  }
+}
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 768px) {
+  #profile {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    gap: 2rem;
+    height: auto; /* Allow the section to adjust height based on content */
+    text-align: center;
+    padding: 20px;
+  }
+
+  .section__pic-container, .section__pic-container2 {
+    width: 100%;
+    max-width: 250px; /* Limit max width to fit mobile screen */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Keep circular shape */
+  }
+
+  .section__pic-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
 }
 
 
